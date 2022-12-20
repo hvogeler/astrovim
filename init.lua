@@ -9,7 +9,7 @@ require("user.utils")
 -- where a value with no key simply has an implicit numeric key
 --
 --
-function attach_to_debug()
+function Attach_to_debug()
    local dap = require('dap')
    dap.configurations.java = {
       {
@@ -22,23 +22,23 @@ function attach_to_debug()
    dap.continue()
 end
 
-function get_test_runner(test_name, debug)
+function Get_test_runner(test_name, debug)
    if debug then
       return 'mvn test -Dmaven.surefire.debug -Dtest="' .. test_name .. '"'
    end
    return 'mvn test -Dtest="' .. test_name .. '"'
 end
 
-function run_java_test_method(debug)
+function Run_java_test_method(debug)
    local utils = require 'user.utils'
    local method_name = utils.get_current_full_method_name("\\#")
-   vim.cmd('term ' .. get_test_runner(method_name, debug))
+   vim.cmd('term ' .. Get_test_runner(method_name, debug))
 end
 
-function run_java_test_class(debug)
+function Run_java_test_class(debug)
    local utils = require 'user.utils'
    local class_name = utils.get_current_full_class_name()
-   vim.cmd('term ' .. get_test_runner(class_name, debug))
+   vim.cmd('term ' .. Get_test_runner(class_name, debug))
 end
 
 local path_to_java_dap = "/home/hvo/.config/hvvim/java-debug/"
